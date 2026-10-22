@@ -1,0 +1,182 @@
+app:
+  name: FlightTracker CV
+  version: 1.0.0
+  debug: false
+  log_level: INFO
+
+camera:
+  device: 0
+  width: 1920
+  height: 1080
+  fps: 30
+  autofocus: true
+  exposure: -1  # -1 = auto
+  buffer_size: 1
+  # ── Fixed-camera bearing calibration ──────────────────────────────────────
+  # Set heading_deg to the compass direction the camera centre points toward.
+  # 0 = North, 90 = East, 180 = South, 270 = West.
+  # Run:  python main.py --calibrate   to set this interactively.
+  heading_deg: 67.0          # UPDATE THIS after calibration
+  hfov_deg: 60.0            # horizontal field of view of your lens (degrees)
+  vfov_deg: 34.0            # vertical field of view (degrees)
+  elevation_deg: 5.0        # tilt above horizon (0 = level, + = tilted up)
+  # Location of the camera (used for FR24 queries and bearing math)
+  location:
+    name: N8xt office
+    lat: 1.337771
+    lon: 103.967680
+
+models:
+  detector:
+    type: yolov8
+    model_size: yolov8m
+    weights_path: D:/Personal/CV projects/Flight Tracker/flight_tracker_runs/detect/runs/train/aircraft_detector-2/weights/best.pt
+    pretrained: yolov8m.pt
+    confidence: 0.5
+    iou_threshold: 0.45
+    max_detections: 20
+    device: auto  # auto, cpu, cuda, mps
+    half_precision: false
+    tracker: bytetrack
+    tracker_config: null  # uses default bytetrack config
+
+  classifier:
+    backbone: efficientnet_v2_m
+    weights_path: D:/Personal/CV projects/Flight Tracker/flight_tracker_runs/detect/runs/train/aircraft_detector-2/weights/best.pt
+    image_size: 224
+    top_k: 3
+    confidence_threshold: 0.3
+    device: auto
+    num_aircraft_classes: 100
+    num_airline_classes: 60
+
+training:
+  detector:
+    epochs: 100
+    batch: 12 #reduced from 16 due to limited GPU
+    imgsz: 640
+    lr0: 0.01
+    lrf: 0.01
+    momentum: 0.937
+    weight_decay: 0.0005
+    warmup_epochs: 3
+    patience: 50
+    workers: 0 #was 8 but reduced
+    project: D:/Personal/CV projects/Flight Tracker/flight_tracker_runs/detect/runs/train
+    name: aircraft_detector
+    pretrained: true
+    augment: true
+    rect: false
+    cos_lr: false
+    close_mosaic: 10
+    amp: true
+
+  classifier:
+    epochs: 50
+    batch: 32
+    image_size: 224
+    lr: 0.001
+    weight_decay: 0.0001
+    patience: 10
+    workers: 4
+    scheduler: cosine
+    label_smoothing: 0.1
+    mixed_precision: true
+    checkpoint_dir: weights/classifier_checkpoints
+
+flight_tracker:
+  provider: flightradar24  # flightradar24 or opensky
+  update_interval: 5        # seconds between FR24 polls
+  search_radius_km: 3      # how far around camera to search, keeping it close as near airport
+  max_flights_cache: 200
+  # ── Bearing-first matching (primary identification method) ────────────────
+  # Since the camera is fixed, aircraft position in the frame maps directly
+  # to a real compass bearing. We match on bearing first, then validate with
+  # altitude/speed plausibility. No livery recognition required.
+  bearing_match_tolerance_deg: 8   # tighter = fewer false matches
+  bearing_weight: 0.60             # bearing is the primary signal
+  type_match_weight: 0.25          # YOLO type vs FR24 ICAO type bonus
+  distance_weight: 0.15            # bbox-estimated distance vs FR24 altitude
+  min_match_score: 0.55            # below this score = unmatched
+  # ── Fallback / validation ─────────────────────────────────────────────────
+  speed_plausibility_min_kts: 80   # ignore parked/taxiing aircraft
+  altitude_min_ft: 100             # ignore ground traffic
+  opensky:
+    username: null
+    password: null
+    base_url: https://opensky-network.org/api
+
+overlay:
+  colors:
+    detection_box: [0, 255, 0]       # green
+    detection_box_uncertain: [0, 165, 255]  # orange
+    text_primary: [255, 255, 255]     # white
+    text_secondary: [200, 200, 200]   # light grey
+    hud_bg: [0, 0, 0]                 # black (with alpha)
+    trail: [0, 200, 255]              # cyan
+    compass: [255, 200, 0]            # gold
+    alert: [0, 0, 255]               # red
+    matched: [255, 50, 50]           # bright blue
+  font:
+    face: 0  # cv2.FONT_HERSHEY_SIMPLEX
+    scale_large: 0.7
+    scale_small: 0.5
+    thickness: 2
+  trail:
+    max_points: 30
+    point_radius: 3
+    fade: true
+  hud:
+    top_bar_height: 40
+    bottom_bar_height: 40
+    info_panel_width: 320
+    opacity: 0.75
+  night_mode:
+    clahe_clip: 3.0
+    clahe_grid: 8
+    gain: 1.5
+
+logging:
+  db_path: logs/flight_detections.db
+  screenshot_dir: screenshots
+  max_screenshots_per_flight: 3
+  export_on_exit: true
+  console_level: INFO
+  file_level: DEBUG
+  log_file: logs/flight_tracker.log
+
+notifications:
+  sound:
+    enabled: true
+    detection_beep: true
+    match_chime: true
+  tts:
+    enabled: true
+    engine: pyttsx3
+    rate: 175
+    volume: 0.9
+    announce_matched_only: true
+  telegram:
+    enabled: false
+    bot_token: null
+    chat_id: null
+
+web:
+  host: 0.0.0.0
+  port: 5000
+  debug: false
+  frame_quality: 70  # JPEG quality 1-100
+  frame_emit_interval_ms: 100
+  max_log_entries: 100
+
+data:
+  airline_codes: data/airline_codes.json
+  aircraft_db: data/aircraft_db.json
+  dataset_root: data/aircraft_detection
+  fgvc_root: data/fgvc-aircraft-2013b
+
+testing:
+  video_dir: test_videos
+  results_dir: test_results
+  frame_skip: 5  # process every Nth frame
+  ground_truth_dir: test_videos/ground_truth

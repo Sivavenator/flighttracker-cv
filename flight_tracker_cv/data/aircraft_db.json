@@ -1,0 +1,284 @@
+{
+  "A319": {
+    "manufacturer": "Airbus", "family": "A320", "variants": ["A319-100", "A319neo"],
+    "typical_wingspan_m": 33.91, "typical_length_m": 33.84, "typical_seats": 124,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 39800,
+    "cruise_speed_kts": 447, "category": "narrow_body"
+  },
+  "A320": {
+    "manufacturer": "Airbus", "family": "A320", "variants": ["A320-200", "A320neo", "A320ceo"],
+    "typical_wingspan_m": 35.80, "typical_length_m": 37.57, "typical_seats": 150,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 39800,
+    "cruise_speed_kts": 447, "category": "narrow_body"
+  },
+  "A321": {
+    "manufacturer": "Airbus", "family": "A320", "variants": ["A321-200", "A321neo", "A321XLR"],
+    "typical_wingspan_m": 35.80, "typical_length_m": 44.51, "typical_seats": 185,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 39800,
+    "cruise_speed_kts": 447, "category": "narrow_body"
+  },
+  "A220": {
+    "manufacturer": "Airbus", "family": "A220", "variants": ["A220-100", "A220-300"],
+    "typical_wingspan_m": 35.10, "typical_length_m": 38.71, "typical_seats": 130,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 464, "category": "narrow_body"
+  },
+  "A330": {
+    "manufacturer": "Airbus", "family": "A330", "variants": ["A330-200", "A330-300", "A330neo", "A330-800", "A330-900"],
+    "typical_wingspan_m": 60.30, "typical_length_m": 63.69, "typical_seats": 277,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41450,
+    "cruise_speed_kts": 472, "category": "wide_body"
+  },
+  "A340": {
+    "manufacturer": "Airbus", "family": "A340", "variants": ["A340-300", "A340-500", "A340-600"],
+    "typical_wingspan_m": 63.45, "typical_length_m": 75.36, "typical_seats": 295,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 41100,
+    "cruise_speed_kts": 469, "category": "wide_body"
+  },
+  "A350": {
+    "manufacturer": "Airbus", "family": "A350", "variants": ["A350-900", "A350-1000", "A350F"],
+    "typical_wingspan_m": 64.75, "typical_length_m": 66.80, "typical_seats": 315,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 43100,
+    "cruise_speed_kts": 488, "category": "wide_body"
+  },
+  "A380": {
+    "manufacturer": "Airbus", "family": "A380", "variants": ["A380-800"],
+    "typical_wingspan_m": 79.75, "typical_length_m": 72.72, "typical_seats": 555,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 43000,
+    "cruise_speed_kts": 488, "category": "double_deck"
+  },
+  "B737": {
+    "manufacturer": "Boeing", "family": "737", "variants": ["737-700", "737-800", "737-900", "737 MAX 8", "737 MAX 9", "737 MAX 10"],
+    "typical_wingspan_m": 35.79, "typical_length_m": 39.47, "typical_seats": 162,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 453, "category": "narrow_body"
+  },
+  "B747": {
+    "manufacturer": "Boeing", "family": "747", "variants": ["747-400", "747-8I", "747-8F"],
+    "typical_wingspan_m": 68.40, "typical_length_m": 70.66, "typical_seats": 416,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 45100,
+    "cruise_speed_kts": 490, "category": "jumbo"
+  },
+  "B757": {
+    "manufacturer": "Boeing", "family": "757", "variants": ["757-200", "757-300"],
+    "typical_wingspan_m": 38.05, "typical_length_m": 47.32, "typical_seats": 200,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 42000,
+    "cruise_speed_kts": 458, "category": "narrow_body"
+  },
+  "B767": {
+    "manufacturer": "Boeing", "family": "767", "variants": ["767-200", "767-300", "767-300ER", "767-400"],
+    "typical_wingspan_m": 47.57, "typical_length_m": 54.94, "typical_seats": 218,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 43100,
+    "cruise_speed_kts": 458, "category": "wide_body"
+  },
+  "B777": {
+    "manufacturer": "Boeing", "family": "777", "variants": ["777-200", "777-200ER", "777-300", "777-300ER", "777X", "777-9"],
+    "typical_wingspan_m": 64.80, "typical_length_m": 73.86, "typical_seats": 314,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 43100,
+    "cruise_speed_kts": 488, "category": "wide_body"
+  },
+  "B787": {
+    "manufacturer": "Boeing", "family": "787 Dreamliner", "variants": ["787-8", "787-9", "787-10"],
+    "typical_wingspan_m": 60.12, "typical_length_m": 62.81, "typical_seats": 296,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 43000,
+    "cruise_speed_kts": 488, "category": "wide_body"
+  },
+  "E170": {
+    "manufacturer": "Embraer", "family": "E-Jet", "variants": ["E170-100", "E170-200"],
+    "typical_wingspan_m": 26.00, "typical_length_m": 29.90, "typical_seats": 72,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 447, "category": "regional_jet"
+  },
+  "E175": {
+    "manufacturer": "Embraer", "family": "E-Jet", "variants": ["E175-100", "E175-200", "E175-E2"],
+    "typical_wingspan_m": 31.04, "typical_length_m": 31.68, "typical_seats": 80,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 447, "category": "regional_jet"
+  },
+  "E190": {
+    "manufacturer": "Embraer", "family": "E-Jet", "variants": ["E190-100", "E190-200", "E190-E2"],
+    "typical_wingspan_m": 31.04, "typical_length_m": 36.24, "typical_seats": 98,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 447, "category": "regional_jet"
+  },
+  "E195": {
+    "manufacturer": "Embraer", "family": "E-Jet", "variants": ["E195-100", "E195-E2"],
+    "typical_wingspan_m": 31.04, "typical_length_m": 38.65, "typical_seats": 120,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 447, "category": "regional_jet"
+  },
+  "CRJ200": {
+    "manufacturer": "Bombardier", "family": "CRJ", "variants": ["CRJ200LR", "CRJ200ER"],
+    "typical_wingspan_m": 21.21, "typical_length_m": 26.77, "typical_seats": 50,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 430, "category": "regional_jet"
+  },
+  "CRJ700": {
+    "manufacturer": "Bombardier", "family": "CRJ", "variants": ["CRJ700", "CRJ705"],
+    "typical_wingspan_m": 23.24, "typical_length_m": 32.51, "typical_seats": 70,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 430, "category": "regional_jet"
+  },
+  "CRJ900": {
+    "manufacturer": "Bombardier", "family": "CRJ", "variants": ["CRJ900", "CRJ900 NextGen"],
+    "typical_wingspan_m": 24.85, "typical_length_m": 36.19, "typical_seats": 90,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 430, "category": "regional_jet"
+  },
+  "ATR72": {
+    "manufacturer": "ATR", "family": "ATR 70", "variants": ["ATR 72-500", "ATR 72-600"],
+    "typical_wingspan_m": 27.05, "typical_length_m": 27.17, "typical_seats": 70,
+    "engine_count": 2, "engine_type": "turboprop", "max_altitude_ft": 25000,
+    "cruise_speed_kts": 275, "category": "turboprop"
+  },
+  "ATR42": {
+    "manufacturer": "ATR", "family": "ATR 40", "variants": ["ATR 42-500", "ATR 42-600"],
+    "typical_wingspan_m": 24.57, "typical_length_m": 22.67, "typical_seats": 48,
+    "engine_count": 2, "engine_type": "turboprop", "max_altitude_ft": 25000,
+    "cruise_speed_kts": 268, "category": "turboprop"
+  },
+  "DHC8": {
+    "manufacturer": "De Havilland Canada", "family": "Dash 8", "variants": ["Q100", "Q200", "Q300", "Q400"],
+    "typical_wingspan_m": 28.42, "typical_length_m": 32.84, "typical_seats": 78,
+    "engine_count": 2, "engine_type": "turboprop", "max_altitude_ft": 25000,
+    "cruise_speed_kts": 360, "category": "turboprop"
+  },
+  "F100": {
+    "manufacturer": "Fokker", "family": "Fokker 100", "variants": ["F100"],
+    "typical_wingspan_m": 28.08, "typical_length_m": 35.53, "typical_seats": 109,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 35000,
+    "cruise_speed_kts": 423, "category": "narrow_body"
+  },
+  "MD11": {
+    "manufacturer": "McDonnell Douglas", "family": "MD-11", "variants": ["MD-11", "MD-11F"],
+    "typical_wingspan_m": 51.66, "typical_length_m": 61.21, "typical_seats": 293,
+    "engine_count": 3, "engine_type": "turbofan", "max_altitude_ft": 42000,
+    "cruise_speed_kts": 473, "category": "wide_body"
+  },
+  "MD80": {
+    "manufacturer": "McDonnell Douglas", "family": "MD-80", "variants": ["MD-81", "MD-82", "MD-83", "MD-88"],
+    "typical_wingspan_m": 32.87, "typical_length_m": 45.06, "typical_seats": 155,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 37000,
+    "cruise_speed_kts": 456, "category": "narrow_body"
+  },
+  "DC10": {
+    "manufacturer": "McDonnell Douglas", "family": "DC-10", "variants": ["DC-10-10", "DC-10-30", "DC-10-40"],
+    "typical_wingspan_m": 50.40, "typical_length_m": 55.35, "typical_seats": 270,
+    "engine_count": 3, "engine_type": "turbofan", "max_altitude_ft": 42000,
+    "cruise_speed_kts": 459, "category": "wide_body"
+  },
+  "IL96": {
+    "manufacturer": "Ilyushin", "family": "Il-96", "variants": ["Il-96-300", "Il-96-400"],
+    "typical_wingspan_m": 60.11, "typical_length_m": 55.35, "typical_seats": 300,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 40000,
+    "cruise_speed_kts": 459, "category": "wide_body"
+  },
+  "TU154": {
+    "manufacturer": "Tupolev", "family": "Tu-154", "variants": ["Tu-154B", "Tu-154M"],
+    "typical_wingspan_m": 37.55, "typical_length_m": 47.90, "typical_seats": 180,
+    "engine_count": 3, "engine_type": "turbofan", "max_altitude_ft": 39370,
+    "cruise_speed_kts": 486, "category": "narrow_body"
+  },
+  "AN124": {
+    "manufacturer": "Antonov", "family": "An-124", "variants": ["An-124-100"],
+    "typical_wingspan_m": 73.30, "typical_length_m": 68.96, "typical_seats": 0,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 39400,
+    "cruise_speed_kts": 447, "category": "cargo"
+  },
+  "C130": {
+    "manufacturer": "Lockheed Martin", "family": "C-130 Hercules", "variants": ["C-130H", "C-130J"],
+    "typical_wingspan_m": 40.41, "typical_length_m": 29.79, "typical_seats": 0,
+    "engine_count": 4, "engine_type": "turboprop", "max_altitude_ft": 28000,
+    "cruise_speed_kts": 331, "category": "military_transport"
+  },
+  "C17": {
+    "manufacturer": "Boeing", "family": "C-17 Globemaster", "variants": ["C-17A"],
+    "typical_wingspan_m": 51.74, "typical_length_m": 53.04, "typical_seats": 0,
+    "engine_count": 4, "engine_type": "turbofan", "max_altitude_ft": 45000,
+    "cruise_speed_kts": 450, "category": "military_transport"
+  },
+  "PC12": {
+    "manufacturer": "Pilatus", "family": "PC-12", "variants": ["PC-12/45", "PC-12 NGX"],
+    "typical_wingspan_m": 16.28, "typical_length_m": 14.40, "typical_seats": 9,
+    "engine_count": 1, "engine_type": "turboprop", "max_altitude_ft": 30000,
+    "cruise_speed_kts": 290, "category": "general_aviation"
+  },
+  "C172": {
+    "manufacturer": "Cessna", "family": "172 Skyhawk", "variants": ["172S", "172SP"],
+    "typical_wingspan_m": 11.00, "typical_length_m": 8.28, "typical_seats": 4,
+    "engine_count": 1, "engine_type": "piston", "max_altitude_ft": 14000,
+    "cruise_speed_kts": 122, "category": "general_aviation"
+  },
+  "BE200": {
+    "manufacturer": "Beechcraft", "family": "King Air", "variants": ["King Air 200", "King Air B200"],
+    "typical_wingspan_m": 16.61, "typical_length_m": 13.34, "typical_seats": 9,
+    "engine_count": 2, "engine_type": "turboprop", "max_altitude_ft": 35000,
+    "cruise_speed_kts": 290, "category": "turboprop"
+  },
+  "GL6T": {
+    "manufacturer": "Bombardier", "family": "Global Express", "variants": ["Global 6000", "Global 7500"],
+    "typical_wingspan_m": 31.39, "typical_length_m": 30.40, "typical_seats": 14,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 51000,
+    "cruise_speed_kts": 487, "category": "business_jet"
+  },
+  "GLEX": {
+    "manufacturer": "Bombardier", "family": "Global Express", "variants": ["Global Express", "Global Express XRS"],
+    "typical_wingspan_m": 28.65, "typical_length_m": 29.51, "typical_seats": 14,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 51000,
+    "cruise_speed_kts": 476, "category": "business_jet"
+  },
+  "F900": {
+    "manufacturer": "Dassault", "family": "Falcon", "variants": ["Falcon 900B", "Falcon 900EX"],
+    "typical_wingspan_m": 19.33, "typical_length_m": 20.21, "typical_seats": 12,
+    "engine_count": 3, "engine_type": "turbofan", "max_altitude_ft": 51000,
+    "cruise_speed_kts": 482, "category": "business_jet"
+  },
+  "CL60": {
+    "manufacturer": "Bombardier", "family": "Challenger", "variants": ["Challenger 601", "Challenger 604", "Challenger 605"],
+    "typical_wingspan_m": 19.61, "typical_length_m": 20.85, "typical_seats": 12,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 459, "category": "business_jet"
+  },
+  "C750": {
+    "manufacturer": "Cessna", "family": "Citation X", "variants": ["Citation X", "Citation X+"],
+    "typical_wingspan_m": 19.38, "typical_length_m": 22.04, "typical_seats": 8,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 51000,
+    "cruise_speed_kts": 527, "category": "business_jet"
+  },
+  "EC35": {
+    "manufacturer": "Airbus Helicopters", "family": "EC135", "variants": ["EC135 T2", "EC135 T3"],
+    "typical_wingspan_m": 10.20, "typical_length_m": 10.20, "typical_seats": 7,
+    "engine_count": 2, "engine_type": "turboshaft", "max_altitude_ft": 20000,
+    "cruise_speed_kts": 135, "category": "helicopter"
+  },
+  "B06": {
+    "manufacturer": "Bell", "family": "Bell 206", "variants": ["206B JetRanger", "206L LongRanger"],
+    "typical_wingspan_m": 10.16, "typical_length_m": 9.50, "typical_seats": 5,
+    "engine_count": 1, "engine_type": "turboshaft", "max_altitude_ft": 20000,
+    "cruise_speed_kts": 112, "category": "helicopter"
+  },
+  "R44": {
+    "manufacturer": "Robinson", "family": "R44", "variants": ["R44 Raven I", "R44 Raven II"],
+    "typical_wingspan_m": 10.06, "typical_length_m": 9.06, "typical_seats": 4,
+    "engine_count": 1, "engine_type": "piston", "max_altitude_ft": 14000,
+    "cruise_speed_kts": 100, "category": "helicopter"
+  },
+  "F16": {
+    "manufacturer": "Lockheed Martin", "family": "F-16 Fighting Falcon", "variants": ["F-16A", "F-16C", "F-16D"],
+    "typical_wingspan_m": 9.96, "typical_length_m": 15.03, "typical_seats": 1,
+    "engine_count": 1, "engine_type": "turbofan", "max_altitude_ft": 50000,
+    "cruise_speed_kts": 570, "category": "military_fighter"
+  },
+  "F15": {
+    "manufacturer": "Boeing", "family": "F-15 Eagle", "variants": ["F-15C", "F-15D", "F-15E"],
+    "typical_wingspan_m": 13.05, "typical_length_m": 19.43, "typical_seats": 1,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 65000,
+    "cruise_speed_kts": 570, "category": "military_fighter"
+  },
+  "P8": {
+    "manufacturer": "Boeing", "family": "P-8 Poseidon", "variants": ["P-8A"],
+    "typical_wingspan_m": 37.94, "typical_length_m": 45.87, "typical_seats": 9,
+    "engine_count": 2, "engine_type": "turbofan", "max_altitude_ft": 41000,
+    "cruise_speed_kts": 490, "category": "military_patrol"
+  }
+}

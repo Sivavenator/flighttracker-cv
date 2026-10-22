@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FlightTracker CV — Live Dashboard</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --bg: #050d18;
+      --surface: #0a1929;
+      --border: #1a3a5c;
+      --accent: #00e5ff;
+      --green: #00ff88;
+      --amber: #ffa726;
+      --red: #ff4444;
+      --text: #b0c4d8;
+      --muted: #5e7a94;
+      --font-mono: 'Share Tech Mono', monospace;
+      --font-ui: 'Inter', sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-ui); min-height: 100vh; }
+
+    /* ---- Header ---- */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    header h1 { font-family: var(--font-mono); color: var(--accent); font-size: 1.2rem; letter-spacing: 2px; }
+    #clock { font-family: var(--font-mono); color: var(--accent); font-size: 1rem; }
+    .badge { background: var(--border); color: var(--accent); border-radius: 12px; padding: 2px 10px; font-size: 0.8rem; }
+
+    /* ---- Grid layout ---- */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      padding: 12px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+
+    /* ---- Panels ---- */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .panel-header {
+      background: rgba(0,229,255,0.08);
+      padding: 8px 14px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .panel-body { padding: 12px; }
+
+    /* ---- Video feed ---- */
+    #video-panel { grid-row: 1 / 3; }
+    #live-frame {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      background: #000;
+      display: block;
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* ---- Stats ---- */
+    .stats-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .stat-box {
+      flex: 1;
+      min-width: 80px;
+      background: rgba(0,229,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat-val { font-size: 1.6rem; font-family: var(--font-mono); color: var(--green); }
+    .stat-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+
+    /* ---- Detection log ---- */
+    #detection-log { height: 260px; overflow-y: auto; font-family: var(--font-mono); font-size: 0.74rem; }
+    .log-entry {
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(26,58,92,0.5);
+      cursor: default;
+      transition: background 0.2s;
+    }
+    .log-entry:hover { background: rgba(0,229,255,0.05); }
+    .log-entry .callsign { color: var(--accent); font-weight: bold; }
+    .log-entry .route { color: var(--green); }
+    .log-entry .type { color: var(--amber); }
+    .log-entry .time { color: var(--muted); float: right; }
+
+    /* ---- Map ---- */
+    #map { height: 240px; border-radius: 0 0 6px 6px; }
+
+    /* ---- Chart ---- */
+    #hourly-chart { max-height: 180px; }
+
+    /* ---- Config panel ---- */
+    .config-row { display: flex; align-items: center; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(26,58,92,0.4); font-size: 0.85rem; }
+    .toggle { position: relative; display: inline-block; width: 38px; height: 20px; }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: #333; border-radius: 20px; cursor: pointer; transition: .3s; }
+    .slider:before { content: ""; position: absolute; height: 14px; width: 14px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .3s; }
+    input:checked + .slider { background: var(--accent); }
+    input:checked + .slider:before { transform: translateX(18px); }
+
+    /* ---- Scrollbar ---- */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ---- Matched flash ---- */
+    @keyframes matchFlash { 0%,100%{border-color:var(--border)} 50%{border-color:var(--green)} }
+    .matched-flash { animation: matchFlash 0.8s ease 3; }
+
+    /* ---- Connection indicator ---- */
+    #conn-status { width: 10px; height: 10px; border-radius: 50%; background: var(--red); display: inline-block; margin-right: 6px; transition: background .5s; }
+    #conn-status.connected { background: var(--green); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>&#9992; FLIGHTTRACKER CV</h1>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span id="conn-status"></span>
+    <span id="conn-label" style="font-size:0.8rem;color:var(--muted)">Connecting…</span>
+    <span id="clock">--:--:--</span>
+    <span class="badge" id="ac-badge">AC: 0</span>
+  </div>
+</header>
+
+<div class="main-grid">
+
+  <!-- ====== LEFT: Video + Stats ====== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <!-- Video -->
+    <div class="panel" id="video-panel">
+      <div class="panel-header">
+        LIVE FEED
+        <span id="fps-label" style="color:var(--green);font-size:0.75rem;">-- FPS</span>
+      </div>
+      <img id="live-frame" src="" alt="Live camera feed" />
+    </div>
+
+    <!-- Stats row -->
+    <div class="panel">
+      <div class="panel-header">STATISTICS</div>
+      <div class="panel-body">
+        <div class="stats-row">
+          <div class="stat-box"><div class="stat-val" id="stat-today">0</div><div class="stat-lbl">Today</div></div>
+          <div class="stat-box"><div class="stat-val" id="stat-total">0</div><div class="stat-lbl">Total</div></div>
+          <div class="stat-box"><div class="stat-val" id="stat-airlines">0</div><div class="stat-lbl">Airlines</div></div>
+          <div class="stat-box"><div class="stat-val" id="stat-types">0</div><div class="stat-lbl">Types</div></div>
+          <div class="stat-box"><div class="stat-val" id="stat-flights">0</div><div class="stat-lbl">Flights</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hourly chart -->
+    <div class="panel">
+      <div class="panel-header">DETECTIONS PER HOUR</div>
+      <div class="panel-body" style="padding:8px;">
+        <canvas id="hourly-chart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====== RIGHT: Log + Map + Config ====== -->
+  <div style="display:flex;flex-direction:column;gap:12px;">
+
+    <!-- Detection log -->
+    <div class="panel">
+      <div class="panel-header">DETECTION LOG <span id="log-count" style="color:var(--muted)">0 events</span></div>
+      <div id="detection-log"></div>
+    </div>
+
+    <!-- Leaflet map -->
+    <div class="panel">
+      <div class="panel-header">FLIGHT MAP</div>
+      <div id="map"></div>
+    </div>
+
+    <!-- Config -->
+    <div class="panel">
+      <div class="panel-header">SETTINGS</div>
+      <div class="panel-body">
+        <div class="config-row">
+          Sound <label class="toggle"><input type="checkbox" id="cfg-sound" checked/><span class="slider"></span></label>
+        </div>
+        <div class="config-row">
+          TTS Announcements <label class="toggle"><input type="checkbox" id="cfg-tts" checked/><span class="slider"></span></label>
+        </div>
+        <div class="config-row">
+          Auto-Screenshot <label class="toggle"><input type="checkbox" id="cfg-screenshot" checked/><span class="slider"></span></label>
+        </div>
+        <div class="config-row">
+          Show Trails <label class="toggle"><input type="checkbox" id="cfg-trails" checked/><span class="slider"></span></label>
+        </div>
+        <div style="margin-top:10px;">
+          <label style="font-size:0.8rem;color:var(--muted)">Confidence threshold</label>
+          <input type="range" id="cfg-confidence" min="10" max="90" value="50"
+                 style="width:100%;margin-top:4px;accent-color:var(--accent)"/>
+          <span id="conf-val" style="font-family:var(--font-mono);font-size:0.75rem;color:var(--accent)">0.50</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CDN scripts -->
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
