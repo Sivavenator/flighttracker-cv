@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environment — never bake into image
+venv/
+env/
+.venv/
+
+# Large binary files — use GitHub Releases or volume mounts
+*.pt
+*.pth
+*.onnx
+*.weights
+weights/
+
+# Training outputs
+runs/
+flight_tracker_runs/
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+test_videos/
+
+# Logs and screenshots
+logs/
+screenshots/
+*.db
+*.log
+
+# Dataset
+data/fgvc-aircraft-2013b/
+data/aircraft_detection/images/
+data/aircraft_detection/labels/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Docker
+docker-compose.override.yml
