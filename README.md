@@ -43,7 +43,7 @@ mkdir weights
 # Windows:  copy best.pt weights\best.pt
 # Linux:    cp /path/to/best.pt weights/best.pt
 
-# 3. Update config.yaml with your camera GPS location and heading
+# 3. Update config.yaml with your camera's GPS location and heading
 #    (see Configuration section below)
 
 # 4. Launch web dashboard
@@ -116,8 +116,9 @@ Without correct GPS coordinates and heading, aircraft detection still works but 
 
 The camera is fixed. Pixel X position in the frame maps linearly to a compass bearing:
 
+```
 bearing = camera_heading + (pixel_x - frame_width/2) * (hfov / frame_width)
-
+```
 
 FR24 returns all flights within the search radius. The system matches each detection to the FR24 flight whose bearing from the camera location is closest, then validates with altitude and speed plausibility. No livery recognition or classifier needed for identification.
 
@@ -125,30 +126,31 @@ FR24 returns all flights within the search radius. The system matches each detec
 
 ## Project Structure
 
+```
 flighttracker-cv/
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
 ├── README.md
 └── flight_tracker_cv/
-├── main.py # Entry point
-├── config.yaml # Camera, model, FR24 settings
-├── models/
-│ ├── detector.py # YOLOv8 + ByteTrack wrapper
-│ ├── classifier.py # EfficientNetV2 classifier (optional)
-│ └── flight_tracker.py # FR24 / OpenSky adapter
-├── utils/
-│ ├── overlay.py # HUD rendering
-│ ├── geo_utils.py # Bearing math
-│ ├── logger.py # SQLite detection log
-│ └── sound.py # TTS + audio alerts
-├── training/
-│ └── train_detector.py # YOLOv8 fine-tuning script
-├── web/
-│ └── dashboard.py # Flask web dashboard
-└── data/
-└── aircraft_db.json # Aircraft reference database
-
+    ├── main.py                  # Entry point
+    ├── config.yaml              # Camera, model, FR24 settings
+    ├── models/
+    │   ├── detector.py          # YOLOv8 + ByteTrack wrapper
+    │   ├── classifier.py        # EfficientNetV2 classifier (optional)
+    │   └── flight_tracker.py    # FR24 / OpenSky adapter
+    ├── utils/
+    │   ├── overlay.py           # HUD rendering
+    │   ├── geo_utils.py         # Bearing math
+    │   ├── logger.py            # SQLite detection log
+    │   └── sound.py             # TTS + audio alerts
+    ├── training/
+    │   └── train_detector.py    # YOLOv8 fine-tuning script
+    ├── web/
+    │   └── dashboard.py         # Flask web dashboard
+    └── data/
+        └── aircraft_db.json     # Aircraft reference database
+```
 
 ---
 
