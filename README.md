@@ -7,8 +7,6 @@ A fixed camera points at the sky. Every aircraft that crosses the frame is:
 2. **Matched to a live FR24 flight** via bearing — pixel X position maps to a compass bearing, which is matched against nearby FR24 flights
 3. **Displayed** with callsign, airline, origin/destination, and altitude on a live HUD
 
-Built as a side project while transitioning from Second Officer (Singapore Airlines A350) to Computer Vision Engineer.
-
 ---
 
 ## Results
