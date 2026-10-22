@@ -36,9 +36,10 @@ A fixed camera points at the sky. Every aircraft that crosses the frame is:
 git clone https://github.com/YOUR_USERNAME/flighttracker-cv.git
 cd flighttracker-cv
 
-# 2. Place weights
-mkdir -p weights
-cp /path/to/best.pt weights/best.pt
+# 2. Download best.pt from the Releases page and place it here:
+#    https://github.com/Sivavenator/flighttracker-cv/releases
+mkdir weights
+copy best.pt weights\best.pt
 
 # 3. Launch web dashboard
 docker compose up
